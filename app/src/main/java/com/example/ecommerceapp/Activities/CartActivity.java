@@ -41,6 +41,7 @@ public class CartActivity extends AppCompatActivity {
     MyCartAdapter cartAdapter;
     private FirebaseAuth auth;
     private FirebaseFirestore firestore;
+    int totalBill;
     int overAllTotalAmount;
 
     @Override
@@ -78,7 +79,7 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(CartActivity.this,AddressActivity.class);
-                i.putExtra("allAmount", (Serializable) overAllAmount);
+                i.putExtra("allAmount", String.valueOf(overAllAmount.getText()));
                 startActivity(i);
             }
         });
@@ -102,8 +103,8 @@ public class CartActivity extends AppCompatActivity {
     public BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int totalBill = intent.getIntExtra("totalAmount",0);
-            overAllAmount.setText("Total Amount Rs :"+totalBill);
+            totalBill = intent.getIntExtra("totalAmount",0);
+            overAllAmount.setText(String.valueOf(totalBill));
 
         }
     };

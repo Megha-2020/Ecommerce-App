@@ -38,6 +38,7 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
     FirebaseFirestore firestore;
     Toolbar toolbar;
     String setMyAddress = "";
+    double amount = 0.0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,7 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
 
         //get data from Detailed Activity
         Object obj = getIntent().getSerializableExtra("item");
-        Object obj1 = getIntent().getSerializableExtra("allAmount");
+        String amt = getIntent().getStringExtra("allAmount");
 
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -87,7 +88,6 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
         paymentBbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                double amount = 0.0;
                 if (obj instanceof NewProductsModel){
                     NewProductsModel newProductsModel =(NewProductsModel) obj;
                     amount = newProductsModel.getPrice();
@@ -99,11 +99,8 @@ public class AddressActivity extends AppCompatActivity implements AddressAdapter
                 if (obj instanceof ShowAllModel){
                     ShowAllModel showAllModel =(ShowAllModel) obj;
                     amount = showAllModel.getPrice();
-                }
-
-                if (obj1 instanceof MyCartModel){
-                    MyCartModel myCartModel =(MyCartModel) obj1;
-                    amount = myCartModel.getTotalPrice();
+                }else {
+                    amount = Double.parseDouble(amt);
                 }
 
                 Intent intent = new Intent(AddressActivity.this,PaymentActivity.class);

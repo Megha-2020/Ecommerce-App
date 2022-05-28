@@ -27,8 +27,6 @@ public class onBoardingActivity extends AppCompatActivity {
     TextView[] dots;
     Button btn ,next;
     Animation animation;
-    FirebaseAuth auth;
-    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -37,24 +35,6 @@ public class onBoardingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_on_boarding);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        /*auth = FirebaseAuth.getInstance();
-
-        if (auth.getCurrentUser() != null){
-            startActivity(new Intent(onBoardingActivity.this,MainActivity.class));
-            finish();
-        }
-        sharedPreferences = getSharedPreferences("SplashActivity",MODE_PRIVATE);
-        boolean isFirstTime = sharedPreferences.getBoolean("firstTime",true);
-
-        if (isFirstTime){
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("firstTime",false);
-            editor.commit();
-
-            Intent i = new Intent(onBoardingActivity.this, RegistrationActivity.class);
-            startActivity(i);
-            finish();
-        }*/
         viewPager = findViewById(R.id.slider);
         dotsLayout = findViewById(R.id.dots);
         btn = findViewById(R.id.get_started_btn);
